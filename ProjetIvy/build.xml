@@ -79,7 +79,7 @@
           target: go
                     Go ivy, go!
          ================================= -->
-    <target name="go" depends="install-ivy, generate-src, resolve" 
+    <target name="go" depends="install-ivy, resolve" 
             description="--> resolve dependencies, compile and run the project">
 		<echo message="using ivy to resolve commons-lang 2.1..."/>
         <!-- here comes the magic line: asks ivy to resolve a dependency on 
@@ -113,7 +113,7 @@
             source code to a file. In real life this file would already be
             present on your file system, and this target wouldn't be necessary.
          ================================= -->
-    <target name="generate-src">
+   <!-- <target name="generate-src">
         <mkdir dir="${src.dir}/example" />
         <echo file="${src.dir}/example/Hello.java">
 package example;
@@ -129,8 +129,13 @@ public class Hello {
     }
 }
         </echo>
-    </target>
+    </target> -->
 	
+    <target name="report" description="--> report the project" depends="go">
+        <mkdir dir="${report.dir}" />
+        <ivy:report todir="report"/>
+    </target>
+
     <!-- ================================= 
           target: clean              
          ================================= -->
